@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- SPDX-License-Identifier: GPL-3.0-or-later -->
+<resources>
+    <string name="app_name">Dialer Enhancements</string>
+    <!-- Shown by the LSPosed manager in its module list. -->
+    <string name="module_description">Unlocks call recording in Google Phone and adds recording options. Uses Phone\'s own recorder.</string>
+</resources>
