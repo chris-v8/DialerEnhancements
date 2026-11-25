@@ -10,6 +10,7 @@ import android.os.Bundle
 import io.github.chrisv8.dialerenhancements.BuildConfig
 import io.github.chrisv8.dialerenhancements.shared.Contract
 import io.github.chrisv8.dialerenhancements.shared.FeatureStatus
+import java.util.concurrent.Executors
 
 /**
  * Google Phone's side of the channel to the module app. Only used off the main thread,
@@ -18,6 +19,21 @@ import io.github.chrisv8.dialerenhancements.shared.FeatureStatus
  */
 object BridgeClient {
     private val uri: Uri = Uri.parse(Contract.Bridge.URI)
+
+    /** Reports from hooks are sent from here, never from the thread Google Phone called us on. */
+    private val sender = Executors.newSingleThreadExecutor { Thread(it, "DialerEnhancements-bridge").apply { isDaemon = true } }
+
+    /** Tells the app that [featureId] changed something; the status page shows the time. */
+    fun reportHit(featureId: String) {
+        sender.execute {
+            val context = AppContext.application ?: return@execute
+            try {
+                context.contentResolver.call(uri, Contract.Bridge.METHOD_REPORT_HIT, featureId, null)
+            } catch (t: Throwable) {
+                HookLog.debug("bridge") { "can't report a hit (${t.javaClass.simpleName})" }
+            }
+        }
+    }
 
     fun reportStartup(context: Context, statuses: List<FeatureStatus>, setupProblem: String?) {
         try {

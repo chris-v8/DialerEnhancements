@@ -12,6 +12,7 @@ import io.github.chrisv8.dialerenhancements.hook.Discovery
 import io.github.chrisv8.dialerenhancements.hook.Feature
 import io.github.chrisv8.dialerenhancements.hook.HookLog
 import io.github.chrisv8.dialerenhancements.hook.Hooks
+import io.github.chrisv8.dialerenhancements.hook.Installed
 import io.github.chrisv8.dialerenhancements.hook.Phase
 import io.github.chrisv8.dialerenhancements.hook.find.Finder
 import io.github.chrisv8.dialerenhancements.shared.Contract.FeatureIds
@@ -78,7 +79,7 @@ object SetupCheckFeature : Feature {
     override fun discover(finder: Finder) =
         Discovery(mapOf("onResume" to Activity::class.java.getDeclaredMethod("onResume")))
 
-    override fun install(discovery: Discovery, hooks: Hooks): Int {
+    override fun install(discovery: Discovery, hooks: Hooks): Installed {
         hooks.intercept(discovery.targets.getValue("onResume")) { chain ->
             val result = chain.proceed()
             val activity = chain.thisObject as? Activity
@@ -89,6 +90,6 @@ object SetupCheckFeature : Feature {
             }
             result
         }
-        return 1
+        return Installed(1)
     }
 }

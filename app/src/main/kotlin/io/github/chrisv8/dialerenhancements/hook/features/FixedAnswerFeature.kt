@@ -9,6 +9,7 @@ import io.github.chrisv8.dialerenhancements.hook.Discovery
 import io.github.chrisv8.dialerenhancements.hook.Feature
 import io.github.chrisv8.dialerenhancements.hook.HookLog
 import io.github.chrisv8.dialerenhancements.hook.Hooks
+import io.github.chrisv8.dialerenhancements.hook.Installed
 import io.github.chrisv8.dialerenhancements.hook.Phase
 import io.github.chrisv8.dialerenhancements.hook.find.Finder
 import io.github.chrisv8.dialerenhancements.hook.find.Match
@@ -54,7 +55,7 @@ abstract class FixedAnswerFeature(
         return Discovery(found, note)
     }
 
-    override fun install(discovery: Discovery, hooks: Hooks): Int {
+    override fun install(discovery: Discovery, hooks: Hooks): Installed {
         for ((marker, method) in discovery.targets) {
             hooks.replace(method) {
                 if (firstUse.compareAndSet(true, false)) {
@@ -65,6 +66,6 @@ abstract class FixedAnswerFeature(
                 answer
             }
         }
-        return discovery.targets.size
+        return Installed(discovery.targets.size)
     }
 }

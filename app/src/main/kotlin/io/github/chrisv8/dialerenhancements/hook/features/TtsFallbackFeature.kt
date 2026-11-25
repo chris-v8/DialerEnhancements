@@ -12,6 +12,7 @@ import io.github.chrisv8.dialerenhancements.hook.Discovery
 import io.github.chrisv8.dialerenhancements.hook.Feature
 import io.github.chrisv8.dialerenhancements.hook.HookLog
 import io.github.chrisv8.dialerenhancements.hook.Hooks
+import io.github.chrisv8.dialerenhancements.hook.Installed
 import io.github.chrisv8.dialerenhancements.hook.Phase
 import io.github.chrisv8.dialerenhancements.hook.find.Finder
 import io.github.chrisv8.dialerenhancements.hook.util.SilentWav
@@ -70,7 +71,7 @@ object TtsFallbackFeature : Feature {
         return Discovery(found, if (missing.isEmpty()) "" else "missing: ${missing.joinToString()}")
     }
 
-    override fun install(discovery: Discovery, hooks: Hooks): Int {
+    override fun install(discovery: Discovery, hooks: Hooks): Installed {
         var installed = 0
         for ((role, method) in discovery.targets) {
             try {
@@ -86,7 +87,7 @@ object TtsFallbackFeature : Feature {
                 HookLog.error(id, "can't hook TextToSpeech.$role", t)
             }
         }
-        return installed
+        return Installed(installed)
     }
 
     /** Blank text in; on failure, a silent file plus the "done" callback out. */

@@ -20,6 +20,9 @@ object Contract {
     object Settings {
         const val DIAGNOSTICS = "diagnostic_logging"
         const val DIAGNOSTICS_DEFAULT = false
+
+        const val RECORD_ALL = "record_all_calls"
+        const val RECORD_ALL_DEFAULT = false
     }
 
     /** The module app's content provider that Google Phone reports to. */
@@ -29,6 +32,9 @@ object Contract {
 
         /** Google Phone → app: results of one start of Google Phone. */
         const val METHOD_REPORT_STARTUP = "reportStartup"
+
+        /** Google Phone → app: a feature changed something for the first time since Google Phone started. `arg` = feature id. */
+        const val METHOD_REPORT_HIT = "reportHit"
 
         const val KEY_PHONE_VERSION_NAME = "phoneVersionName"
         const val KEY_PHONE_VERSION_CODE = "phoneVersionCode"
@@ -45,6 +51,10 @@ object Contract {
         const val ANNOUNCEMENT_LOCALE = "announcement_locale"
         const val TTS_FALLBACK = "tts_fallback"
         const val SETUP_CHECK = "setup_check"
+        const val RECORD_ALL = "record_all"
+
+        /** Every id above, so the app can refuse anything else. */
+        val all = setOf(CAN_RECORD, GEOFENCE, COUNTRY, ANNOUNCEMENT_LOCALE, TTS_FALLBACK, SETUP_CHECK, RECORD_ALL)
     }
 
     /** Problems the setup check can find (SPEC F6). */

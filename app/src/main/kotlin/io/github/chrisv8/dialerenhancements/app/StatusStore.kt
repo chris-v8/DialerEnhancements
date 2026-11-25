@@ -24,6 +24,17 @@ data class StartupReport(
 class StatusStore(context: Context) {
     val prefs: SharedPreferences = context.applicationContext.getSharedPreferences(FILE, Context.MODE_PRIVATE)
 
+    /** Kept apart from [prefs], which is replaced on every start of Google Phone. */
+    val hits: SharedPreferences = context.applicationContext.getSharedPreferences(HITS_FILE, Context.MODE_PRIVATE)
+
+    /** Remembers when [featureId] last changed something in Google Phone. */
+    fun saveHit(featureId: String) {
+        hits.edit().putLong(featureId, System.currentTimeMillis()).apply()
+    }
+
+    /** Last time [featureId] changed something, or 0 if never. */
+    fun lastHit(featureId: String): Long = hits.getLong(featureId, 0)
+
     fun saveStartup(extras: Bundle) {
         prefs.edit()
             .clear()
@@ -51,6 +62,7 @@ class StatusStore(context: Context) {
 
     private companion object {
         const val FILE = "startup_report"
+        const val HITS_FILE = "feature_hits"
         const val REPORTED_AT = "reportedAt"
         const val PHONE_VERSION_NAME = "phoneVersionName"
         const val PHONE_VERSION_CODE = "phoneVersionCode"

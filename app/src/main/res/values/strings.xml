@@ -31,7 +31,9 @@
     <string name="feature_announcement_locale">Built-in English announcement</string>
     <string name="feature_tts_fallback">Text-to-speech fallback</string>
     <string name="feature_setup_check">Setup check</string>
+    <string name="feature_record_all">Record all calls</string>
     <string name="feature_unknown">Other feature</string>
+    <string name="feature_last_used">Last used: %1$s</string>
     <string name="state_active">Active</string>
     <plurals name="state_active_count">
         <item quantity="one">Active (%1$d hook)</item>
@@ -40,6 +42,10 @@
     <string name="state_not_found">Not found in this version</string>
     <string name="state_failed">Failed</string>
     <string name="state_skipped">Not needed</string>
+
+    <string name="section_automatic_recording">Automatic recording</string>
+    <string name="setting_record_all">Record all calls</string>
+    <string name="setting_record_all_description">Google Phone records every call by itself: incoming and outgoing, contacts and unknown numbers. When off, Google Phone\'s own rules (unknown numbers, selected numbers) apply. Takes effect from the next call.</string>
 
     <string name="section_settings">Settings</string>
     <string name="setting_diagnostics">Diagnostic logging</string>

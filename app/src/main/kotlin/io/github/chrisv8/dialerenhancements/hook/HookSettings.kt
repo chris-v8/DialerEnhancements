@@ -31,6 +31,11 @@ object HookSettings {
         get() = read { it.getBoolean(Contract.Settings.DIAGNOSTICS, Contract.Settings.DIAGNOSTICS_DEFAULT) }
             ?: Contract.Settings.DIAGNOSTICS_DEFAULT
 
+    /** Read on every call decision, so switching it in the app takes effect at once. */
+    val recordAll: Boolean
+        get() = read { it.getBoolean(Contract.Settings.RECORD_ALL, Contract.Settings.RECORD_ALL_DEFAULT) }
+            ?: Contract.Settings.RECORD_ALL_DEFAULT
+
     private fun <T> read(block: (SharedPreferences) -> T): T? = try {
         prefs?.let(block)
     } catch (_: Throwable) {

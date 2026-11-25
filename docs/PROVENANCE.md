@@ -20,6 +20,8 @@ Files carried over from Chris's own work in CallRecording are marked "Carried ov
 | `hook/features/FixedAnswerFeature.kt`, `hook/features/RecordingEligibility.kt` | Written from the spec; both geofence names are Chris's finding | F1–F4 | 2026-11-25 |
 | `hook/features/TtsFallbackFeature.kt`, `hook/util/SilentWav.kt` | Written from the spec | F5 | 2026-11-25 |
 | `hook/features/SetupCheck.kt` | Written from the spec | F6 | 2026-11-25 |
+| `hook/find/FutureFactory.kt` | Written from the spec | F7.1 | 2026-11-25 |
+| `hook/features/RecordAllFeature.kt` | Written from the spec; the two v88 markers and "hook every producer found" are Chris's findings | F7 | 2026-11-25 |
 | `app/*` (module app: settings, status page, bridge provider) | Written from the spec and plan | F11, F12, REWRITE_PLAN §6 | 2026-11-25 |
 | `app/src/main/res/**`, `AndroidManifest.xml`, `META-INF/xposed/*` | Written for this project | — | 2026-11-25 |
 | Build files, `.github/workflows/build.yml` | Written for this project | REWRITE_PLAN §10 | 2026-11-25 |

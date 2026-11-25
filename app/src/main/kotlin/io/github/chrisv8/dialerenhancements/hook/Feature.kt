@@ -26,6 +26,9 @@ class Discovery(val targets: Map<String, Method>, val note: String = "") {
     }
 }
 
+/** What [Feature.install] did: how many hooks went in, plus a note when something was left out. */
+data class Installed(val hooks: Int, val note: String = "")
+
 /**
  * One feature of the module. Adding a feature means writing one class and listing it in
  * [FeatureRegistry]; [Startup] does the rest (timing, error handling, caching, status).
@@ -46,8 +49,8 @@ interface Feature {
     fun discover(finder: Finder): Discovery
 
     /**
-     * Hooks the targets and returns how many hooks were installed.
-     * Must leave Google Phone's behaviour alone for any input it doesn't recognise.
+     * Hooks the targets. Must leave Google Phone's behaviour alone for any input it doesn't
+     * recognise.
      */
-    fun install(discovery: Discovery, hooks: Hooks): Int
+    fun install(discovery: Discovery, hooks: Hooks): Installed
 }

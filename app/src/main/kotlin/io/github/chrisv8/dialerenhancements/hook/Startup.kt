@@ -95,8 +95,9 @@ class Startup(private val module: XposedModule, private val param: PackageReadyP
                 FeatureStatus(feature.id, State.NOT_FOUND, detail = discovery.note, cached = cached != null)
             } else {
                 val installed = feature.install(discovery, hooks)
-                val state = if (installed > 0) State.ACTIVE else State.NOT_FOUND
-                FeatureStatus(feature.id, state, installed, discovery.note, cached = cached != null)
+                val state = if (installed.hooks > 0) State.ACTIVE else State.NOT_FOUND
+                val note = listOf(discovery.note, installed.note).filter { it.isNotEmpty() }.joinToString("; ")
+                FeatureStatus(feature.id, state, installed.hooks, note, cached = cached != null)
             }
         } catch (t: Throwable) {
             HookLog.error(feature.id, "failed; Google Phone keeps its normal behaviour here", t)

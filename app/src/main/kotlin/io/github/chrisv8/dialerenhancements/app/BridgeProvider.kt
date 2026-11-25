@@ -24,6 +24,7 @@ class BridgeProvider : ContentProvider() {
         checkCaller()
         when (method) {
             Contract.Bridge.METHOD_REPORT_STARTUP -> StatusStore(appContext()).saveStartup(extras ?: Bundle.EMPTY)
+            Contract.Bridge.METHOD_REPORT_HIT -> if (arg in Contract.FeatureIds.all) StatusStore(appContext()).saveHit(arg!!)
             else -> throw IllegalArgumentException("unknown method")
         }
         return null

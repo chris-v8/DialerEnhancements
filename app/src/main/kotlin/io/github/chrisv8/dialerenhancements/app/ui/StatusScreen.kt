@@ -71,7 +71,11 @@ fun StatusScreen(refreshKey: Int, onOpenPhone: () -> Unit) {
     DisposableEffect(store) {
         val listener = SharedPreferences.OnSharedPreferenceChangeListener { _, _ -> reportVersion++ }
         store.prefs.registerOnSharedPreferenceChangeListener(listener)
-        onDispose { store.prefs.unregisterOnSharedPreferenceChangeListener(listener) }
+        store.hits.registerOnSharedPreferenceChangeListener(listener)
+        onDispose {
+            store.prefs.unregisterOnSharedPreferenceChangeListener(listener)
+            store.hits.unregisterOnSharedPreferenceChangeListener(listener)
+        }
     }
     val report = remember(refreshKey, reportVersion) { store.loadStartup() }
     val installed = remember(refreshKey) { installedPhone(context) }
@@ -87,7 +91,8 @@ fun StatusScreen(refreshKey: Int, onOpenPhone: () -> Unit) {
         ) {
             ModuleCard(service)
             PhoneCard(installed, report, onOpenPhone)
-            report?.let { FeaturesCard(it.features) }
+            AutomaticRecordingCard(settings, connected = service != null)
+            report?.let { FeaturesCard(it.features, lastHit = { id -> store.lastHit(id) }) }
             SettingsCard(settings, connected = service != null)
             Text(
                 stringResource(R.string.notice),
@@ -154,7 +159,7 @@ private fun PhoneCard(installed: InstalledPhone?, report: StartupReport?, onOpen
 }
 
 @Composable
-private fun FeaturesCard(features: List<FeatureStatus>) {
+private fun FeaturesCard(features: List<FeatureStatus>, lastHit: (String) -> Long) {
     SectionCard(R.string.section_features) {
         for (feature in features) {
             Column(Modifier.padding(vertical = 4.dp)) {
@@ -162,9 +167,28 @@ private fun FeaturesCard(features: List<FeatureStatus>) {
                     Text(stringResource(featureName(feature.id)), Modifier.weight(1f))
                     Text(stateText(feature), color = stateColor(feature.state), style = MaterialTheme.typography.labelLarge)
                 }
-                if (feature.detail.isNotEmpty() && feature.state != State.ACTIVE) Secondary(feature.detail)
+                if (feature.detail.isNotEmpty()) Secondary(feature.detail)
+                val hit = lastHit(feature.id)
+                if (hit != 0L) Secondary(stringResource(R.string.feature_last_used, formatTime(hit)))
             }
         }
+    }
+}
+
+@Composable
+private fun AutomaticRecordingCard(settings: ModuleSettings, connected: Boolean) {
+    SectionCard(R.string.section_automatic_recording) {
+        var recordAll by remember { mutableStateOf(settings.recordAll) }
+        SwitchRow(
+            title = stringResource(R.string.setting_record_all),
+            description = stringResource(R.string.setting_record_all_description),
+            checked = recordAll,
+            onChange = {
+                recordAll = it
+                settings.recordAll = it
+            },
+        )
+        if (!connected) Secondary(stringResource(R.string.settings_offline))
     }
 }
 
@@ -242,6 +266,7 @@ private fun featureName(id: String): Int = when (id) {
     FeatureIds.ANNOUNCEMENT_LOCALE -> R.string.feature_announcement_locale
     FeatureIds.TTS_FALLBACK -> R.string.feature_tts_fallback
     FeatureIds.SETUP_CHECK -> R.string.feature_setup_check
+    FeatureIds.RECORD_ALL -> R.string.feature_record_all
     else -> R.string.feature_unknown
 }
 
