@@ -4,4 +4,47 @@
     <string name="app_name">Dialer Enhancements</string>
     <!-- Shown by the LSPosed manager in its module list. -->
     <string name="module_description">Unlocks call recording in Google Phone and adds recording options. Uses Phone\'s own recorder.</string>
+
+    <string name="section_module">Module</string>
+    <string name="module_connected">Active in %1$s %2$s (API %3$d)</string>
+    <string name="module_not_connected">Not connected to LSPosed. Enable Dialer Enhancements in LSPosed, then reopen this app.</string>
+    <string name="scope_ok">Google Phone is in the module\'s scope.</string>
+    <string name="scope_missing">Google Phone isn\'t in the module\'s scope. Add it in LSPosed.</string>
+    <string name="module_version">Module version %1$s</string>
+
+    <string name="section_phone">Google Phone</string>
+    <string name="phone_installed">Installed version: %1$s</string>
+    <string name="phone_not_installed">Google Phone isn\'t installed.</string>
+    <string name="report_none">No report yet. Force-stop Google Phone, then open it once.</string>
+    <string name="report_last">Last started with the module: %1$s (version %2$s)</string>
+    <string name="report_outdated">Google Phone or the module has changed since then. Force-stop Google Phone and open it again to refresh this page.</string>
+    <string name="restart_hint">After installing or updating the module, force-stop Google Phone so it picks up the change.</string>
+    <string name="open_phone">Open Google Phone</string>
+    <string name="setup_problem_permission">Google Phone can\'t capture call audio on this phone. It has to be installed as a system app.</string>
+    <string name="setup_problem_downloadable">This Google Phone build can\'t record calls. Install the full version.</string>
+    <string name="setup_problem_unknown">Google Phone reported a setup problem.</string>
+
+    <string name="section_features">Features</string>
+    <string name="feature_can_record">Record button</string>
+    <string name="feature_geofence">Region check</string>
+    <string name="feature_country">Country check</string>
+    <string name="feature_announcement_locale">Built-in English announcement</string>
+    <string name="feature_tts_fallback">Text-to-speech fallback</string>
+    <string name="feature_setup_check">Setup check</string>
+    <string name="feature_unknown">Other feature</string>
+    <string name="state_active">Active</string>
+    <plurals name="state_active_count">
+        <item quantity="one">Active (%1$d hook)</item>
+        <item quantity="other">Active (%1$d hooks)</item>
+    </plurals>
+    <string name="state_not_found">Not found in this version</string>
+    <string name="state_failed">Failed</string>
+    <string name="state_skipped">Not needed</string>
+
+    <string name="section_settings">Settings</string>
+    <string name="setting_diagnostics">Diagnostic logging</string>
+    <string name="setting_diagnostics_description">Adds detailed lines to the LSPosed log. Never includes phone numbers or names. Takes effect at once.</string>
+    <string name="settings_offline">Settings are saved here and passed on to Google Phone once LSPosed connects.</string>
+
+    <string name="notice">\"Active\" means the change is in place, not that a call was recorded. Google Phone still needs its own recording support. Tell the other party when you record, and follow the recording laws where you are.</string>
 </resources>

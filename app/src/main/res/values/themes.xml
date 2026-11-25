@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- SPDX-License-Identifier: GPL-3.0-or-later -->
+<resources>
+    <!-- Only used before Compose draws the first frame; the screens themselves use Material 3 in Compose. -->
+    <style name="Theme.DialerEnhancements" parent="android:Theme.Material.Light.NoActionBar" />
+</resources>
