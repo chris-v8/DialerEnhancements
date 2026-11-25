@@ -25,6 +25,6 @@ Files carried over from Chris's own work in CallRecording are marked "Carried ov
 | `hook/features/BubbleFeature.kt` | Written from the spec; the approach is Chris's (CallRecording BubbleHook), reimplemented without looking at that file | F9 | 2026-11-25 |
 | `app/*` (module app: settings, status page, bridge provider) | Written from the spec and plan | F11, F12, REWRITE_PLAN §6 | 2026-11-25 |
 | `app/src/main/res/**`, `AndroidManifest.xml`, `META-INF/xposed/*` | Written for this project | — | 2026-11-25 |
-| Build files, `.github/workflows/build.yml` | Written for this project | REWRITE_PLAN §10 | 2026-11-25 |
+| Build files | Written for this project | REWRITE_PLAN §10 | 2026-11-25 |
 | `gradlew`, `gradlew.bat`, `gradle/wrapper/*` | Gradle wrapper (Apache-2.0), taken from the user's own Remove-service-numbers project | — | 2026-11-25 |
 | `docs/design/*` | Behavioural spec, plan and the CallRecording provenance analysis (no upstream code) | — | 2026-11-25 |

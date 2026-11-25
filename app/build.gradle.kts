@@ -7,7 +7,7 @@ plugins {
 }
 
 // Release signing comes from keystore.properties (never committed) or from environment
-// variables (GitHub Actions). Without either, only debug builds are signed.
+// variables. Without either, only debug builds are signed.
 val signing = Properties().apply {
     rootProject.file("keystore.properties").takeIf { it.isFile }?.inputStream()?.use { load(it) }
 }

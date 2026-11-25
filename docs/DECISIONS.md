@@ -18,6 +18,7 @@ The design documents in `docs/design/` were written before these choices were ma
 | 12 | Matching rule | "Exactly one match" for every lookup, including F1–F4 (1.5 took the first match there). | 2026-11-25 |
 | 13 | Processes | Hooks are installed only in Google Phone's main process. | 2026-11-25 |
 | 14 | ABIs | arm64-v8a only. | 2026-11-25 |
-| 15 | Signing | A fresh release key created by the user; CI reads it from GitHub secrets (`DE_KEYSTORE_*`). | 2026-11-25 |
+| 15 | Signing | A fresh release key created by the user, read from `keystore.properties` (never committed) or `DE_KEYSTORE_*` environment variables. | 2026-11-25 |
 | 16 | Versions | 1.0 = milestone M1 (recording works). Then parity with CallRecording 1.5, then Material 3 polish and new features toward 2.0. | 2026-11-25 |
 | 17 | Out of scope for now | Old in-call layout; SIM service numbers (separate module); power-button idea (separate project). | 2026-11-25 |
+| 18 | Builds | Local only (Android SDK in `C:/tools/android-sdk`, JDK 21 in `C:/tools/jdk-21`). No GitHub Actions. | 2026-11-25 |
