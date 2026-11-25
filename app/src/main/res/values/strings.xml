@@ -32,6 +32,7 @@
     <string name="feature_tts_fallback">Text-to-speech fallback</string>
     <string name="feature_setup_check">Setup check</string>
     <string name="feature_record_all">Record all calls</string>
+    <string name="feature_bubble">Return-to-call bubble (Android 12+)</string>
     <string name="feature_unknown">Other feature</string>
     <string name="feature_last_used">Last used: %1$s</string>
     <string name="state_active">Active</string>

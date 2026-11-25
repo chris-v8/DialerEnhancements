@@ -267,6 +267,7 @@ private fun featureName(id: String): Int = when (id) {
     FeatureIds.TTS_FALLBACK -> R.string.feature_tts_fallback
     FeatureIds.SETUP_CHECK -> R.string.feature_setup_check
     FeatureIds.RECORD_ALL -> R.string.feature_record_all
+    FeatureIds.BUBBLE -> R.string.feature_bubble
     else -> R.string.feature_unknown
 }
 

@@ -52,9 +52,10 @@ object Contract {
         const val TTS_FALLBACK = "tts_fallback"
         const val SETUP_CHECK = "setup_check"
         const val RECORD_ALL = "record_all"
+        const val BUBBLE = "bubble"
 
         /** Every id above, so the app can refuse anything else. */
-        val all = setOf(CAN_RECORD, GEOFENCE, COUNTRY, ANNOUNCEMENT_LOCALE, TTS_FALLBACK, SETUP_CHECK, RECORD_ALL)
+        val all = setOf(CAN_RECORD, GEOFENCE, COUNTRY, ANNOUNCEMENT_LOCALE, TTS_FALLBACK, SETUP_CHECK, RECORD_ALL, BUBBLE)
     }
 
     /** Problems the setup check can find (SPEC F6). */

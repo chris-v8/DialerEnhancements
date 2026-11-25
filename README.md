@@ -13,7 +13,9 @@ An LSPosed module for **Google Phone** (`com.google.android.dialer`) that unlock
 - Warns you once when your Google Phone can't record at all (for example when it isn't installed as a system app).
 - **Record all calls** (off by default): Google Phone then records every call by itself, contacts included. The switch takes effect from the next call, without restarting Google Phone.
 
-Later versions add the Android 12 "return to call" bubble and choosing several Selected numbers at once.
+- Brings back Google Phone's floating **return-to-call bubble** on Android 12 and later (speaker, mute, hang up, back to the call).
+
+A later version adds choosing several Selected numbers at once.
 
 ## Requirements
 

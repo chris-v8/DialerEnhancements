@@ -5,6 +5,7 @@
 package io.github.chrisv8.dialerenhancements.hook
 
 import io.github.chrisv8.dialerenhancements.hook.features.AnnouncementLocaleFeature
+import io.github.chrisv8.dialerenhancements.hook.features.BubbleFeature
 import io.github.chrisv8.dialerenhancements.hook.features.CanRecordFeature
 import io.github.chrisv8.dialerenhancements.hook.features.CountryFeature
 import io.github.chrisv8.dialerenhancements.hook.features.GeofenceFeature
@@ -23,6 +24,7 @@ object FeatureRegistry {
         TtsFallbackFeature,
         // Deferred phase.
         RecordAllFeature,
+        BubbleFeature,
         SetupCheckFeature,
     )
 }

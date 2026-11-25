@@ -20,9 +20,16 @@ enum class Phase {
  * What a feature found: its target methods, each under a role name of the feature's choosing,
  * plus an optional note for the status page (for example why something was skipped).
  */
-class Discovery(val targets: Map<String, Method>, val note: String = "") {
+class Discovery(
+    val targets: Map<String, Method>,
+    val note: String = "",
+    /** True when the feature isn't needed on this phone at all (for example an older Android). */
+    val notNeeded: Boolean = false,
+) {
     companion object {
         fun nothing(note: String) = Discovery(emptyMap(), note)
+
+        fun notNeeded(note: String) = Discovery(emptyMap(), note, notNeeded = true)
     }
 }
 

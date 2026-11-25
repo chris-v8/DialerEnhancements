@@ -86,12 +86,14 @@ class Startup(private val module: XposedModule, private val param: PackageReadyP
         val status = try {
             val cached = if (feature.searchesCode) cache.get(feature.id, classLoader) else null
             val discovery = cached ?: feature.discover(finder).also {
-                if (feature.searchesCode) cache.put(feature.id, it)
+                if (feature.searchesCode && !it.notNeeded) cache.put(feature.id, it)
             }
             for ((role, method) in discovery.targets) {
                 HookLog.debug(feature.id) { "$role -> ${method.declaringClass.name}.${method.name}" }
             }
-            if (discovery.targets.isEmpty()) {
+            if (discovery.notNeeded) {
+                FeatureStatus(feature.id, State.SKIPPED, detail = discovery.note)
+            } else if (discovery.targets.isEmpty()) {
                 FeatureStatus(feature.id, State.NOT_FOUND, detail = discovery.note, cached = cached != null)
             } else {
                 val installed = feature.install(discovery, hooks)
