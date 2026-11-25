@@ -1,0 +1,55 @@
+// SPDX-License-Identifier: GPL-3.0-or-later
+// Copyright (C) 2026 Chris (chris-v8)
+// Origin: written for DialerEnhancements from docs/design/REWRITE_PLAN.md §5.
+
+package io.github.chrisv8.dialerenhancements.shared
+
+import io.github.chrisv8.dialerenhancements.BuildConfig
+
+/**
+ * Names shared by the module app and the hooks inside Google Phone.
+ * Both sides read them from here, so they can never drift apart.
+ */
+object Contract {
+    const val GOOGLE_PHONE = "com.google.android.dialer"
+
+    /** Remote-preferences group (managed by LSPosed) that holds the user's settings. */
+    const val SETTINGS_GROUP = "settings"
+
+    /** Settings keys and their defaults. */
+    object Settings {
+        const val DIAGNOSTICS = "diagnostic_logging"
+        const val DIAGNOSTICS_DEFAULT = false
+    }
+
+    /** The module app's content provider that Google Phone reports to. */
+    object Bridge {
+        const val AUTHORITY = "${BuildConfig.APPLICATION_ID}.bridge"
+        const val URI = "content://$AUTHORITY"
+
+        /** Google Phone → app: results of one start of Google Phone. */
+        const val METHOD_REPORT_STARTUP = "reportStartup"
+
+        const val KEY_PHONE_VERSION_NAME = "phoneVersionName"
+        const val KEY_PHONE_VERSION_CODE = "phoneVersionCode"
+        const val KEY_MODULE_VERSION_CODE = "moduleVersionCode"
+        const val KEY_FEATURES = "features"
+        const val KEY_SETUP_PROBLEM = "setupProblem"
+    }
+
+    /** Stable ids of every feature. Used in logs, the status page and the discovery cache. */
+    object FeatureIds {
+        const val CAN_RECORD = "can_record"
+        const val GEOFENCE = "geofence"
+        const val COUNTRY = "country"
+        const val ANNOUNCEMENT_LOCALE = "announcement_locale"
+        const val TTS_FALLBACK = "tts_fallback"
+        const val SETUP_CHECK = "setup_check"
+    }
+
+    /** Problems the setup check can find (SPEC F6). */
+    object SetupProblem {
+        const val NO_CAPTURE_PERMISSION = "no_capture_permission"
+        const val DOWNLOADABLE_BUILD = "downloadable_build"
+    }
+}
