@@ -22,3 +22,4 @@ The design documents in `docs/design/` were written before these choices were ma
 | 16 | Versions | 1.0 = milestone M1 (recording works). Then parity with CallRecording 1.5, then Material 3 polish and new features toward 2.0. | 2026-11-25 |
 | 17 | Out of scope for now | Old in-call layout; SIM service numbers (separate module); power-button idea (separate project). | 2026-11-25 |
 | 18 | Builds | Local only (Android SDK in `C:/tools/android-sdk`, JDK 21 in `C:/tools/jdk-21`). No GitHub Actions. | 2026-11-25 |
+| 19 | Bubble after a swipe | A bubble swiped away during a call comes back the next time the call screen is left (Google keeps it hidden for the rest of the call). | 2026-11-26 |

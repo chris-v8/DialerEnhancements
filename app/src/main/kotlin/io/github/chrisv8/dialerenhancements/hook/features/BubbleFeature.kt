@@ -20,10 +20,7 @@ import io.github.chrisv8.dialerenhancements.hook.find.FutureFactory
 import io.github.chrisv8.dialerenhancements.hook.find.Match
 import io.github.chrisv8.dialerenhancements.hook.find.shape
 import io.github.chrisv8.dialerenhancements.shared.Contract.FeatureIds
-import java.lang.reflect.Field
 import java.lang.reflect.Method
-import java.lang.reflect.Modifier
-import java.util.concurrent.ConcurrentHashMap
 import java.util.concurrent.Future
 import java.util.concurrent.atomic.AtomicBoolean
 
@@ -32,9 +29,11 @@ import java.util.concurrent.atomic.AtomicBoolean
  * (speaker, mute, hang up, back to the call), shown when you leave the call screen mid-call.
  *
  * The bubble code is still in Google Phone, but its yes/no decision refuses outright on
- * Android 12+. This feature makes the same decision again, minus that one refusal:
- * no bubble if it was dismissed for this call, or if Phone may not draw over other apps,
- * or if Google asked to hold it back; otherwise show it.
+ * Android 12+. This feature makes the same decision again, minus that refusal: no bubble if
+ * Phone may not draw over other apps, or if Google asked to hold it back; otherwise show it.
+ *
+ * Unlike Google's own decision, a bubble swiped away during a call comes back the next time
+ * the call screen is left (the user's choice: it is too easy to swipe away by accident).
  *
  * Only Google Phone versions whose decision method contains that exact Android 12 refusal are
  * touched. Anything unfamiliar lets Google's own decision run.
@@ -56,10 +55,6 @@ object BubbleFeature : Feature {
         params(Any::class.java)
         returnsSubtypeOf(Future::class.java)
     }
-
-    /** Per call-state class: its "dismissed for this call" flag, or null if not exactly one. */
-    private val dismissedFlags = ConcurrentHashMap<Class<*>, Field>()
-    private val unfamiliarClasses = ConcurrentHashMap.newKeySet<Class<*>>()
 
     private val firstOverride = AtomicBoolean(true)
 
@@ -113,40 +108,15 @@ object BubbleFeature : Feature {
     }
 
     /**
-     * Google's decision without the Android 12 refusal. The producer's input is a list of
-     * [Context, Boolean "hold back", per-call bubble state]. Returns null for anything else.
+     * Google's decision without the Android 12 refusal and without the "dismissed for this
+     * call" rule. The producer's input is a list of [Context, Boolean "hold back", per-call
+     * bubble state]. Returns null for anything else.
      */
     private fun decide(input: Any?): Boolean? {
         val inputs = input as? List<*> ?: return null
-        if (inputs.size < 3) return null
+        if (inputs.size < 3 || inputs[2] == null) return null
         val context = inputs[0] as? Context ?: return null
         val holdBack = inputs[1] as? Boolean ?: return null
-        val state = inputs[2] ?: return null
-        val dismissedFlag = dismissedFlagOf(state.javaClass) ?: return null
-
-        val dismissed = (dismissedFlag.get(state) as? AtomicBoolean ?: return null).get()
-        return when {
-            dismissed -> false
-            !Settings.canDrawOverlays(context) -> false
-            else -> !holdBack
-        }
-    }
-
-    /** The one instance field of type AtomicBoolean in the call-state class. */
-    private fun dismissedFlagOf(type: Class<*>): Field? {
-        dismissedFlags[type]?.let { return it }
-        if (type in unfamiliarClasses) return null
-        val flags = type.declaredFields.filter {
-            it.type == AtomicBoolean::class.java && !Modifier.isStatic(it.modifiers)
-        }
-        if (flags.size != 1) {
-            HookLog.warn(id, "bubble state has ${flags.size} AtomicBoolean fields, expected 1; Google decides")
-            unfamiliarClasses += type
-            return null
-        }
-        return flags.single().also {
-            it.isAccessible = true
-            dismissedFlags[type] = it
-        }
+        return if (!Settings.canDrawOverlays(context)) false else !holdBack
     }
 }
