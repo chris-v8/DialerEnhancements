@@ -24,7 +24,7 @@ Release build 1.0.0 (minified, signed with the personal-modules key), installed 
 | All nine features active after a fresh install (code search) | Pass: critical phase 273 ms. |
 | Status report reaches the app with no launcher activity | Pass. |
 | No launcher icon; settings registered for the LSPosed manager | Pass (`MODULE_SETTINGS` activity resolves, no `LAUNCHER` entry). |
-| Opening the settings from the LSPosed manager | Not yet confirmed. |
+| Opening the settings from the LSPosed manager | Pass (user). |
 
 ## 2026-11-25: realme RMX3363, ColorOS 12 / Android 12, Vector 2.2 (API 102), Google Phone 175.0.763896600
 
