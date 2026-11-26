@@ -2,7 +2,7 @@
 
 Results of tests on a real phone, newest first. "Spec D-n" refers to the acceptance checklist in `docs/design/SPEC.md`, Appendix D.
 
-## 2026-11-26: 1.1.0 (unreleased), same phone, Google Phone 175.0.763896600
+## 2026-11-26/27: 1.1.0, same phone, Google Phone 175.0.763896600
 
 | Test | Result |
 |---|---|

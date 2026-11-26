@@ -1,5 +1,17 @@
 # Release checks
 
+## 1.1.0 (2026-11-27)
+
+### Similarity check against CallRecording
+
+Same script and method as for 1.0.0. No new shared text strings. New identifier hits are only "CallRecording" in the origin comments of the two new feature files, and `MODULE_SETTINGS`, which is LSPosed's own intent category (the old project's preference file happened to have a similar name). Nothing to change.
+
+### Other checks
+
+- Unit tests and lint pass.
+- Release APK signed with the personal-modules key (certificate SHA-256 `3c379dd2…ed097`), 16 KB page alignment checked.
+- Every change in 1.1.0 was tested on the phone with the release build (see `docs/TEST_LOG.md`).
+
 ## 1.0.0 (2026-11-26)
 
 ### Similarity check against CallRecording (REWRITE_PLAN §12.9)
