@@ -13,7 +13,7 @@ Results of tests on a real phone, newest first. "Spec D-n" refers to the accepta
 | Route B: two numbers queued in the app, applied when the Selected-numbers screen opened; queue cleared only after Google Phone confirmed; app's copy of the list updated (Spec D-9) | Pass: "queued in the app: added 2 of 2", then the same for "removed 2 of 2". |
 | Google's own Remove button still works with the hooks installed | Pass. |
 | Multi-select switched off: Add opens the system picker again (Spec D-10) | Pass, and without restarting Google Phone. |
-| Bubble swiped away comes back | Not yet tested on a call. |
+| Bubble swiped away during a call comes back the next time the call screen is left | Pass (user). |
 
 The list was empty before the tests and empty afterwards.
 
