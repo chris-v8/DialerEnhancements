@@ -23,6 +23,10 @@ object Contract {
 
         const val RECORD_ALL = "record_all_calls"
         const val RECORD_ALL_DEFAULT = false
+
+        /** Google Phone's "Add" button under Selected numbers opens the module's multi-select list. */
+        const val MULTI_SELECT = "multi_select_add_button"
+        const val MULTI_SELECT_DEFAULT = true
     }
 
     /** The module app's content provider that Google Phone reports to. */
@@ -35,6 +39,19 @@ object Contract {
 
         /** Google Phone → app: a feature changed something for the first time since Google Phone started. `arg` = feature id. */
         const val METHOD_REPORT_HIT = "reportHit"
+
+        /** Google Phone → app: Google's current Selected-numbers list. Extras: [KEY_NUMBERS]. */
+        const val METHOD_PUT_SNAPSHOT = "putSnapshot"
+
+        /** Google Phone → app: changes waiting to be applied. Reply: [KEY_ADD_URIS], [KEY_NUMBERS], [KEY_TOKEN]. */
+        const val METHOD_PEEK_QUEUE = "peekQueue"
+
+        /** Google Phone → app: the queue read with token `arg` was applied; forget it. */
+        const val METHOD_ACK_QUEUE = "ackQueue"
+
+        const val KEY_NUMBERS = "numbers"
+        const val KEY_ADD_URIS = "addUris"
+        const val KEY_TOKEN = "token"
 
         const val KEY_PHONE_VERSION_NAME = "phoneVersionName"
         const val KEY_PHONE_VERSION_CODE = "phoneVersionCode"
@@ -53,9 +70,27 @@ object Contract {
         const val SETUP_CHECK = "setup_check"
         const val RECORD_ALL = "record_all"
         const val BUBBLE = "bubble"
+        const val SELECTED_NUMBERS = "selected_numbers"
 
         /** Every id above, so the app can refuse anything else. */
-        val all = setOf(CAN_RECORD, GEOFENCE, COUNTRY, ANNOUNCEMENT_LOCALE, TTS_FALLBACK, SETUP_CHECK, RECORD_ALL, BUBBLE)
+        val all = setOf(
+            CAN_RECORD, GEOFENCE, COUNTRY, ANNOUNCEMENT_LOCALE, TTS_FALLBACK, SETUP_CHECK, RECORD_ALL, BUBBLE,
+            SELECTED_NUMBERS,
+        )
+    }
+
+    /** The module's number picker and the intent extras it shares with the hooks (SPEC F10.3). */
+    object Picker {
+        const val ACTIVITY = "${BuildConfig.APPLICATION_ID}.app.picker.NumberPickerActivity"
+
+        /** Picker → Google Phone: `ArrayList<Uri>` of contact data rows to add. */
+        const val EXTRA_ADD = "${BuildConfig.APPLICATION_ID}.extra.ADD"
+
+        /** Picker → Google Phone: `ArrayList<String>` of numbers to remove, exactly as Google stored them. */
+        const val EXTRA_REMOVE = "${BuildConfig.APPLICATION_ID}.extra.REMOVE"
+
+        /** Google Phone → picker: `ArrayList<String>` of Google's current list, as stored. */
+        const val EXTRA_EXISTING = "${BuildConfig.APPLICATION_ID}.extra.EXISTING"
     }
 
     /** Problems the setup check can find (SPEC F6). */

@@ -2,6 +2,21 @@
 
 Results of tests on a real phone, newest first. "Spec D-n" refers to the acceptance checklist in `docs/design/SPEC.md`, Appendix D.
 
+## 2026-11-26: same phone, Google Phone 175.0.763896600
+
+| Test | Result |
+|---|---|
+| Selected numbers: all five hooks found (result handler, Add button + launch, remove listener, screen opened) | Pass. |
+| Route A: Add opens the module's list; two numbers added at once (Spec D-7, adds) | Pass: "picker: added 2 of 2". |
+| Route A: existing numbers shown ticked; two unticked and removed at once (Spec D-7, removes) | Pass: "picker: added 0 of 0, removed 2 of 2". |
+| Route A with exactly one new number uses Google's own path (Spec D-8) | Pass: no module involvement, number added. |
+| Route B: two numbers queued in the app, applied when the Selected-numbers screen opened; queue cleared only after Google Phone confirmed; app's copy of the list updated (Spec D-9) | Pass: "queued in the app: added 2 of 2", then the same for "removed 2 of 2". |
+| Google's own Remove button still works with the hooks installed | Pass. |
+| Multi-select switched off: Add opens the system picker again (Spec D-10) | Pass, and without restarting Google Phone. |
+| Bubble swiped away comes back | Not yet tested on a call. |
+
+The list was empty before the tests and empty afterwards.
+
 ## 2026-11-25: realme RMX3363, ColorOS 12 / Android 12, Vector 2.2 (API 102), Google Phone 175.0.763896600
 
 | Test | Result |

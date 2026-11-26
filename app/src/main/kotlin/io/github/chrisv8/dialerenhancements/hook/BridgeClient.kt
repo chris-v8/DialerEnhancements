@@ -35,6 +35,50 @@ object BridgeClient {
         }
     }
 
+    /** Runs [block] on the bridge thread, off whatever thread Google Phone called us on. */
+    fun inBackground(block: () -> Unit) = sender.execute {
+        try {
+            block()
+        } catch (t: Throwable) {
+            HookLog.warn("bridge", "background task failed", t)
+        }
+    }
+
+    /** Sends Google's current Selected-numbers list to the app (for its checkmarks). Never blocks. */
+    fun putSnapshot(numbers: List<String>) = inBackground {
+        val context = AppContext.application ?: return@inBackground
+        call(context, Contract.Bridge.METHOD_PUT_SNAPSHOT, null, Bundle().apply {
+            putStringArrayList(Contract.Bridge.KEY_NUMBERS, ArrayList(numbers))
+        })
+    }
+
+    /** Selected-numbers changes queued in the app. Blocking; call it from [inBackground]. */
+    class Queue(val addUris: List<Uri>, val removeNumbers: List<String>, val token: String) {
+        val isEmpty get() = addUris.isEmpty() && removeNumbers.isEmpty()
+    }
+
+    fun peekQueue(context: Context): Queue? {
+        val reply = call(context, Contract.Bridge.METHOD_PEEK_QUEUE, null, null) ?: return null
+        val token = reply.getString(Contract.Bridge.KEY_TOKEN) ?: return null
+        return Queue(
+            reply.getStringArrayList(Contract.Bridge.KEY_ADD_URIS).orEmpty().map(Uri::parse),
+            reply.getStringArrayList(Contract.Bridge.KEY_NUMBERS).orEmpty(),
+            token,
+        )
+    }
+
+    /** Tells the app the queue read with [token] has been applied. Blocking. */
+    fun ackQueue(context: Context, token: String) {
+        call(context, Contract.Bridge.METHOD_ACK_QUEUE, token, null)
+    }
+
+    private fun call(context: Context, method: String, arg: String?, extras: Bundle?): Bundle? = try {
+        context.contentResolver.call(uri, method, arg, extras)
+    } catch (t: Throwable) {
+        HookLog.warn("bridge", "can't reach the module app for $method (${t.javaClass.simpleName})")
+        null
+    }
+
     fun reportStartup(context: Context, statuses: List<FeatureStatus>, setupProblem: String?) {
         try {
             val info = context.packageManager.getPackageInfo(context.packageName, 0)

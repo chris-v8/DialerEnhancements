@@ -2,6 +2,9 @@
 <!-- SPDX-License-Identifier: GPL-3.0-or-later -->
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
+    <!-- Lists the user's phone numbers in the Selected-numbers picker. -->
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+
     <!-- Lets the app see Google Phone (its version, its launcher screen, and who is calling the bridge). -->
     <queries>
         <package android:name="com.google.android.dialer" />
@@ -25,6 +28,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <!-- Opened by Google Phone's Add button (for a result) and from this app. It refuses
+             results to any other app. -->
+        <activity
+            android:name=".app.picker.NumberPickerActivity"
+            android:exported="true"
+            android:label="@string/picker_title" />
 
         <!-- Google Phone reports here. The provider itself only accepts this app and Google Phone. -->
         <provider

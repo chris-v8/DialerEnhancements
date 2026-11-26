@@ -36,6 +36,11 @@ object HookSettings {
         get() = read { it.getBoolean(Contract.Settings.RECORD_ALL, Contract.Settings.RECORD_ALL_DEFAULT) }
             ?: Contract.Settings.RECORD_ALL_DEFAULT
 
+    /** Read on every Add click. Off when the settings can't be read at all, so the stock picker stays. */
+    val multiSelect: Boolean
+        get() = read { it.getBoolean(Contract.Settings.MULTI_SELECT, Contract.Settings.MULTI_SELECT_DEFAULT) }
+            ?: false
+
     private fun <T> read(block: (SharedPreferences) -> T): T? = try {
         prefs?.let(block)
     } catch (_: Throwable) {

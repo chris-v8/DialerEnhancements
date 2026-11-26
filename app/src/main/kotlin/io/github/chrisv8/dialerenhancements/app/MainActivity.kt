@@ -10,6 +10,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.runtime.mutableIntStateOf
+import io.github.chrisv8.dialerenhancements.app.picker.NumberPickerActivity
 import io.github.chrisv8.dialerenhancements.app.ui.AppTheme
 import io.github.chrisv8.dialerenhancements.app.ui.StatusScreen
 import io.github.chrisv8.dialerenhancements.shared.Contract
@@ -23,7 +24,11 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             AppTheme {
-                StatusScreen(refreshKey = resumed.intValue, onOpenPhone = ::openGooglePhone)
+                StatusScreen(
+                    refreshKey = resumed.intValue,
+                    onOpenPhone = ::openGooglePhone,
+                    onChooseNumbers = { startActivity(Intent(this, NumberPickerActivity::class.java)) },
+                )
             }
         }
     }

@@ -22,9 +22,20 @@ class BridgeProvider : ContentProvider() {
 
     override fun call(method: String, arg: String?, extras: Bundle?): Bundle? {
         checkCaller()
+        val selected by lazy { SelectedNumbersStore(appContext()) }
         when (method) {
             Contract.Bridge.METHOD_REPORT_STARTUP -> StatusStore(appContext()).saveStartup(extras ?: Bundle.EMPTY)
             Contract.Bridge.METHOD_REPORT_HIT -> if (arg in Contract.FeatureIds.all) StatusStore(appContext()).saveHit(arg!!)
+            Contract.Bridge.METHOD_PUT_SNAPSHOT ->
+                extras?.getStringArrayList(Contract.Bridge.KEY_NUMBERS)?.let { selected.putSnapshot(it.filterNotNull()) }
+            Contract.Bridge.METHOD_PEEK_QUEUE -> return selected.queue().let { queue ->
+                Bundle().apply {
+                    putString(Contract.Bridge.KEY_TOKEN, queue.token)
+                    putStringArrayList(Contract.Bridge.KEY_ADD_URIS, ArrayList(queue.addUris))
+                    putStringArrayList(Contract.Bridge.KEY_NUMBERS, ArrayList(queue.removeNumbers))
+                }
+            }
+            Contract.Bridge.METHOD_ACK_QUEUE -> arg?.let(selected::acknowledge)
             else -> throw IllegalArgumentException("unknown method")
         }
         return null

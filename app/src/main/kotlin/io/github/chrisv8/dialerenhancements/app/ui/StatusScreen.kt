@@ -46,6 +46,7 @@ import io.github.chrisv8.dialerenhancements.BuildConfig
 import io.github.chrisv8.dialerenhancements.R
 import io.github.chrisv8.dialerenhancements.app.Framework
 import io.github.chrisv8.dialerenhancements.app.ModuleSettings
+import io.github.chrisv8.dialerenhancements.app.SelectedNumbersStore
 import io.github.chrisv8.dialerenhancements.app.StartupReport
 import io.github.chrisv8.dialerenhancements.app.StatusStore
 import io.github.chrisv8.dialerenhancements.shared.Contract
@@ -60,10 +61,11 @@ import java.util.Locale
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun StatusScreen(refreshKey: Int, onOpenPhone: () -> Unit) {
+fun StatusScreen(refreshKey: Int, onOpenPhone: () -> Unit, onChooseNumbers: () -> Unit) {
     val context = LocalContext.current
     val store = remember { StatusStore(context) }
     val settings = remember { ModuleSettings(context) }
+    val selected = remember { SelectedNumbersStore(context) }
     val service by Framework.service.collectAsState()
 
     // Re-read when the activity resumes and whenever Google Phone sends a new report.
@@ -72,12 +74,15 @@ fun StatusScreen(refreshKey: Int, onOpenPhone: () -> Unit) {
         val listener = SharedPreferences.OnSharedPreferenceChangeListener { _, _ -> reportVersion++ }
         store.prefs.registerOnSharedPreferenceChangeListener(listener)
         store.hits.registerOnSharedPreferenceChangeListener(listener)
+        selected.prefs.registerOnSharedPreferenceChangeListener(listener)
         onDispose {
             store.prefs.unregisterOnSharedPreferenceChangeListener(listener)
             store.hits.unregisterOnSharedPreferenceChangeListener(listener)
+            selected.prefs.unregisterOnSharedPreferenceChangeListener(listener)
         }
     }
     val report = remember(refreshKey, reportVersion) { store.loadStartup() }
+    val queue = remember(refreshKey, reportVersion) { selected.queue() }
     val installed = remember(refreshKey) { installedPhone(context) }
 
     Scaffold(topBar = { TopAppBar(title = { Text(stringResource(R.string.app_name)) }) }) { padding ->
@@ -92,6 +97,7 @@ fun StatusScreen(refreshKey: Int, onOpenPhone: () -> Unit) {
             ModuleCard(service)
             PhoneCard(installed, report, onOpenPhone)
             AutomaticRecordingCard(settings, connected = service != null)
+            SelectedNumbersCard(settings, queue, onChooseNumbers)
             report?.let { FeaturesCard(it.features, lastHit = { id -> store.lastHit(id) }) }
             SettingsCard(settings, connected = service != null)
             Text(
@@ -193,6 +199,30 @@ private fun AutomaticRecordingCard(settings: ModuleSettings, connected: Boolean)
 }
 
 @Composable
+private fun SelectedNumbersCard(settings: ModuleSettings, queue: SelectedNumbersStore.Queue, onChoose: () -> Unit) {
+    SectionCard(R.string.section_selected_numbers) {
+        Secondary(stringResource(R.string.selected_numbers_explained))
+        FilledTonalButton(onClick = onChoose) { Text(stringResource(R.string.selected_numbers_choose)) }
+        if (!queue.isEmpty) {
+            Text(
+                stringResource(R.string.selected_numbers_waiting, queue.addUris.size, queue.removeNumbers.size),
+                color = MaterialTheme.colorScheme.primary,
+            )
+        }
+        var multiSelect by remember { mutableStateOf(settings.multiSelect) }
+        SwitchRow(
+            title = stringResource(R.string.setting_multi_select),
+            description = stringResource(R.string.setting_multi_select_description),
+            checked = multiSelect,
+            onChange = {
+                multiSelect = it
+                settings.multiSelect = it
+            },
+        )
+    }
+}
+
+@Composable
 private fun SettingsCard(settings: ModuleSettings, connected: Boolean) {
     SectionCard(R.string.section_settings) {
         var diagnostics by remember { mutableStateOf(settings.diagnostics) }
@@ -268,6 +298,7 @@ private fun featureName(id: String): Int = when (id) {
     FeatureIds.SETUP_CHECK -> R.string.feature_setup_check
     FeatureIds.RECORD_ALL -> R.string.feature_record_all
     FeatureIds.BUBBLE -> R.string.feature_bubble
+    FeatureIds.SELECTED_NUMBERS -> R.string.feature_selected_numbers
     else -> R.string.feature_unknown
 }
 

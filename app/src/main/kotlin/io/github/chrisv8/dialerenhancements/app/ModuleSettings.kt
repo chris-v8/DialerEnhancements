@@ -30,12 +30,20 @@ class ModuleSettings(context: Context) {
             Framework.service.value?.let(::copyTo)
         }
 
+    var multiSelect: Boolean
+        get() = local.getBoolean(Contract.Settings.MULTI_SELECT, Contract.Settings.MULTI_SELECT_DEFAULT)
+        set(value) {
+            local.edit().putBoolean(Contract.Settings.MULTI_SELECT, value).apply()
+            Framework.service.value?.let(::copyTo)
+        }
+
     /** Writes every setting to LSPosed. Called whenever LSPosed connects, and after each change. */
     fun copyTo(service: XposedService) {
         try {
             service.getRemotePreferences(Contract.SETTINGS_GROUP).edit()
                 .putBoolean(Contract.Settings.DIAGNOSTICS, diagnostics)
                 .putBoolean(Contract.Settings.RECORD_ALL, recordAll)
+                .putBoolean(Contract.Settings.MULTI_SELECT, multiSelect)
                 .apply()
         } catch (t: Throwable) {
             Log.w(TAG, "can't save settings to LSPosed", t)

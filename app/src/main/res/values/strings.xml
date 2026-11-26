@@ -32,6 +32,7 @@
     <string name="feature_tts_fallback">Text-to-speech fallback</string>
     <string name="feature_setup_check">Setup check</string>
     <string name="feature_record_all">Record all calls</string>
+    <string name="feature_selected_numbers">Selected numbers: multi-select</string>
     <string name="feature_bubble">Return-to-call bubble (Android 12+)</string>
     <string name="feature_unknown">Other feature</string>
     <string name="feature_last_used">Last used: %1$s</string>
@@ -47,6 +48,27 @@
     <string name="section_automatic_recording">Automatic recording</string>
     <string name="setting_record_all">Record all calls</string>
     <string name="setting_record_all_description">Google Phone records every call by itself: incoming and outgoing, contacts and unknown numbers. When off, Google Phone\'s own rules (unknown numbers, selected numbers) apply. Takes effect from the next call.</string>
+
+    <string name="section_selected_numbers">Selected numbers</string>
+    <string name="selected_numbers_explained">Google Phone records the numbers on its Selected numbers list while its own \"Selected numbers\" switch is on. Choose several numbers at once here, or with the Add button in Google Phone.</string>
+    <string name="selected_numbers_choose">Choose numbers</string>
+    <string name="selected_numbers_waiting">Waiting: %1$d to add, %2$d to remove. Open Google Phone → Settings → Call recording → Selected numbers to apply.</string>
+    <string name="setting_multi_select">Multi-select in Google Phone\'s Add button</string>
+    <string name="setting_multi_select_description">The Add button under Selected numbers opens this app\'s list, where you can tick and untick many numbers. When off, Google\'s one-number picker opens.</string>
+
+    <string name="picker_title">Numbers to always record</string>
+    <string name="picker_search">Search name or number</string>
+    <string name="picker_needs_contacts">Dialer Enhancements needs access to your contacts to list your phone numbers.</string>
+    <string name="picker_allow_contacts">Allow access</string>
+    <string name="picker_no_numbers">No numbers found.</string>
+    <string name="picker_existing_unknown">Numbers already on Google\'s list show as ticked after you have opened Google Phone\'s Selected numbers screen once.</string>
+    <string name="picker_existing_unreadable">Google\'s current list couldn\'t be read, so numbers already on it aren\'t ticked.</string>
+    <string name="picker_on_list">On Google\'s list (untick to remove)</string>
+    <string name="picker_will_remove">Will be removed</string>
+    <string name="picker_cancel">Cancel</string>
+    <string name="picker_save">Save (+%1$d / −%2$d)</string>
+    <string name="picker_queued">Saved: %1$d to add, %2$d to remove. In Google Phone, open Settings → Call recording → Selected numbers to apply.</string>
+    <string name="picker_queued_open_failed">Saved: %1$d to add, %2$d to remove. Google Phone couldn\'t be opened; open it yourself, then Settings → Call recording → Selected numbers.</string>
 
     <string name="section_settings">Settings</string>
     <string name="setting_diagnostics">Diagnostic logging</string>
