@@ -9,6 +9,7 @@ Results of tests on a real phone, newest first. "Spec D-n" refers to the accepta
 | Built-in English announcement removed; the other eight features active | Pass. |
 | Call recorded automatically through the text-to-speech fallback (no TTS engine installed) | Pass: "text-to-speech failed (-1); used a silent announcement instead"; recording saved (user). |
 | No announcement heard by the other side | Pass (user). |
+| Text-to-speech engine bypassed: the silent file is always used | Pass: call recorded automatically, nothing announced (user). Not yet tried with an engine installed. |
 
 ## 2026-11-26: same phone, Google Phone 175.0.763896600
 

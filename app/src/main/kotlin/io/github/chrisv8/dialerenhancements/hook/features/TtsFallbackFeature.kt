@@ -23,15 +23,18 @@ import java.util.Locale
 import java.util.concurrent.ConcurrentHashMap
 
 /**
- * SPEC F5: lets recording start on phones where text-to-speech is missing or broken.
+ * SPEC F5: no spoken recording announcement, and recording starts whether or not a
+ * text-to-speech engine is installed or working.
  *
- * Before recording, Google Phone writes its announcement to a file with text-to-speech and
- * waits for the "done" callback. Without a working engine that never happens and recording
- * fails. These hooks hand Google Phone a silent sound file and the callback instead.
- *
- * The announcement text is always blanked (the user's decision), so any announcement made
- * with text-to-speech is silent. Where Google Phone has built-in audio for the country, that
+ * Before recording, Google Phone writes its announcement to a sound file with text-to-speech
+ * and waits for the "done" callback. Without a working engine that never happens and
+ * recording fails. The module never asks the engine at all (the user's decision): it writes a
+ * silent sound file itself and sends the "done" callback, so nothing is announced and how an
+ * engine behaves doesn't matter. Where Google Phone has built-in audio for the country, that
  * audio still plays.
+ *
+ * This applies to every sound file Google Phone makes with text-to-speech, not only the
+ * recording announcement.
  *
  * The hooks are on Android's own TextToSpeech class, so no code search is needed.
  *
@@ -90,28 +93,27 @@ object TtsFallbackFeature : Feature {
         return Installed(installed)
     }
 
-    /** Blank text in; on failure, a silent file plus the "done" callback out. */
+    /** The engine is never asked: a silent file and the "done" callback go back to Google Phone. */
     private fun hookSynthesize(method: Method, hooks: Hooks) {
         hooks.intercept(method) { chain ->
-            val args = chain.args.toTypedArray()
-            args[0] = ""
-            val result = chain.proceed(args)
-            if (result == TextToSpeech.SUCCESS) return@intercept result
-
-            var answer = result
-            val file = args[2] as? File
-            if (file != null) {
-                try {
-                    SilentWav.writeTo(file)
-                    answer = TextToSpeech.SUCCESS
-                } catch (t: Throwable) {
-                    HookLog.error(id, "can't write the silent announcement file", t)
-                }
+            val file = chain.getArg(2) as? File
+            val written = file != null && try {
+                SilentWav.writeTo(file)
+                true
+            } catch (t: Throwable) {
+                HookLog.error(id, "can't write the silent announcement file", t)
+                false
+            }
+            if (!written) {
+                // Last resort: let the engine make the file, with the text blanked.
+                val args = chain.args.toTypedArray()
+                args[0] = ""
+                return@intercept chain.proceed(args)
             }
             // Google Phone waits for this callback before it starts the recorder.
-            notifyDone(chain.thisObject as? TextToSpeech, args[3] as? String)
-            once("synthesize", "text-to-speech failed ($result); used a silent announcement instead")
-            answer
+            notifyDone(chain.thisObject as? TextToSpeech, chain.getArg(3) as? String)
+            once("synthesize", "announcement replaced by a silent sound file")
+            TextToSpeech.SUCCESS
         }
     }
 

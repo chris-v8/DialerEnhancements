@@ -2,6 +2,9 @@
 
 ## 1.1.0 (unreleased)
 
+**Changed**
+- No spoken announcement on phones with a text-to-speech engine either: the module no longer asks the engine at all and hands Google Phone a silent sound file directly. This also avoids depending on how an engine handles empty text.
+
 **Removed**
 - The module no longer switches Google Phone to its built-in English recording announcement. On phones where Google Phone has no built-in announcement for the country and no text-to-speech engine is working, recording now starts without any announcement.
 

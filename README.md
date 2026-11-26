@@ -8,7 +8,7 @@ An LSPosed module for **Google Phone** (`com.google.android.dialer`) that unlock
 
 - Shows the record button in countries and on phones where Google Phone hides it.
 - Keeps Google Phone's own "record unknown numbers" and "record selected numbers" switches from turning themselves off (its daily region check is answered before any of its code runs).
-- Lets recording start on phones without a working text-to-speech engine.
+- Lets recording start on phones without a working text-to-speech engine, and makes no spoken announcement (with or without an engine).
 - Warns you once when your Google Phone can't record at all (for example when it isn't installed as a system app).
 - **Record all calls** (off by default): Google Phone then records every call by itself, contacts included. The switch takes effect from the next call, without restarting Google Phone.
 
