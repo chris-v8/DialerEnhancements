@@ -4,7 +4,7 @@ An LSPosed module for **Google Phone** (`com.google.android.dialer`) that unlock
 
 > Recording calls is regulated differently in every country. Tell the other party when you record, and follow the laws where you are.
 
-## What it does (version 1.0 goal)
+## What it does
 
 - Shows the record button in countries and on phones where Google Phone hides it.
 - Keeps Google Phone's own "record unknown numbers" and "record selected numbers" switches from turning themselves off (its daily region check is answered before any of its code runs).
@@ -26,7 +26,7 @@ An LSPosed module for **Google Phone** (`com.google.android.dialer`) that unlock
 1. Install the APK.
 2. In LSPosed, enable **Dialer Enhancements**. Its scope is Google Phone.
 3. Force-stop Google Phone (or reboot), then open it once.
-4. Open Dialer Enhancements: the status page shows which features are active on your Google Phone version.
+4. In the LSPosed manager, tap Dialer Enhancements to open its settings (the app has no home-screen icon). The status page shows which features are active on your Google Phone version.
 
 If you used the older CallRecording module, disable it in LSPosed first. Both change the same parts of Google Phone.
 
