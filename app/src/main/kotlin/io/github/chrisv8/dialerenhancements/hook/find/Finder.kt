@@ -62,6 +62,9 @@ class Finder(private val openSearch: () -> CodeSearch) : AutoCloseable {
         return pick("callee with $shape", candidates)
     }
 
+    /** Every method that calls [callee] (no uniqueness rule; used to look at what the callers do). */
+    fun callersOf(callee: Method): List<Method> = search().callersOf(callee).distinct()
+
     /** The one method declared directly in [owner] that has [shape]. Plain reflection, no code search. */
     fun uniqueDeclared(owner: Class<*>, shape: MethodShape): Match =
         pick("method of ${owner.name} with $shape", owner.declaredMethods.filter(shape::matches))

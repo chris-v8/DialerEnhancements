@@ -2,6 +2,9 @@
 
 ## 1.1.0 (unreleased)
 
+**New**
+- No "Recording saved." message sliding up on the call screen when a recording ends during a call. Other call-screen messages are unchanged.
+
 **Changed**
 - No spoken announcement on phones with a text-to-speech engine either: the module no longer asks the engine at all and hands Google Phone a silent sound file directly. This also avoids depending on how an engine handles empty text.
 

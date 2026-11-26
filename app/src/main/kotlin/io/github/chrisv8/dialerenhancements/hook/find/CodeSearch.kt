@@ -17,4 +17,7 @@ interface CodeSearch : AutoCloseable {
 
     /** Methods that [caller]'s code invokes. */
     fun calledBy(caller: Method, paramCount: Int? = null): List<Method>
+
+    /** Methods whose code invokes [callee]. */
+    fun callersOf(callee: Method): List<Method>
 }

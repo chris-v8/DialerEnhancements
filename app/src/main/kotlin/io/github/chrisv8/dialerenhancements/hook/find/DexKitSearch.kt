@@ -30,6 +30,9 @@ class DexKitSearch private constructor(
             .mapNotNull(::resolve)
     }
 
+    override fun callersOf(callee: Method): List<Method> =
+        bridge.getMethodData(callee)?.callers.orEmpty().mapNotNull(::resolve)
+
     private fun resolve(data: MethodData): Method? =
         if (!data.isMethod) null else try {
             data.getMethodInstance(classLoader)

@@ -42,6 +42,8 @@ class FinderTest {
         override fun calledBy(caller: Method, paramCount: Int?) =
             calls[caller].orEmpty().filter { paramCount == null || it.parameterCount == paramCount }
 
+        override fun callersOf(callee: Method) = calls.filterValues { callee in it }.keys.toList()
+
         override fun close() {
             closed = true
         }
@@ -101,6 +103,13 @@ class FinderTest {
             returnsSubtypeOf(Future::class.java)
         }
         assertEquals(Match.Found(wrap), finder.uniqueCallee(listOf(producer), factoryShape))
+    }
+
+    @Test
+    fun callersAreFound() {
+        val producer = method("produce")
+        val finder = Finder { FakeSearch(emptyMap(), mapOf(producer to listOf(wrap))) }
+        assertEquals(listOf(producer), finder.callersOf(wrap))
     }
 
     @Test

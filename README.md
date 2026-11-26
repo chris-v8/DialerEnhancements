@@ -13,6 +13,7 @@ An LSPosed module for **Google Phone** (`com.google.android.dialer`) that unlock
 - **Record all calls** (off by default): Google Phone then records every call by itself, contacts included. The switch takes effect from the next call, without restarting Google Phone.
 
 - Brings back Google Phone's floating **return-to-call bubble** on Android 12 and later (speaker, mute, hang up, back to the call). If you swipe it away by accident, it comes back the next time you leave the call screen.
+- No "Recording saved." message popping up on the call screen when a recording ends.
 - **Selected numbers, several at once:** Google Phone's Add button (Settings → Call recording → Selected numbers) opens a list where you tick numbers to add and untick numbers to remove, all in one go. You can also choose them in the Dialer Enhancements app; the changes are applied the next time you open that Google Phone screen. Every change goes through Google Phone's own code; the module never edits its settings file.
 
 ## Requirements
