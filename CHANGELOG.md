@@ -1,0 +1,35 @@
+# Changelog
+
+## 1.0.0 (2026-11-26)
+
+First release. Dialer Enhancements is a new, independent LSPosed module for Google Phone, written from a behaviour description. It does what the CallRecording module 1.5 did, and a little more.
+
+**Recording**
+- Shows the record button in countries and on phones where Google Phone hides it (record permission, region and country checks).
+- Google Phone's daily region check can no longer switch its "record unknown numbers" and "record selected numbers" settings off: the module is in place before any of Google Phone's code runs.
+- Uses Google's built-in English recording announcement where the Google Phone version supports it.
+- Recording starts on phones without a working text-to-speech engine. The announcement text is always blanked.
+- A one-time warning when Google Phone can't record at all on the phone (not a system app, or a "downloadable" build).
+
+**Record all calls** (off by default)
+- Google Phone records every call by itself, contacts included. The switch works from the next call, without restarting Google Phone.
+
+**Return-to-call bubble on Android 12+**
+- Brings back Google Phone's floating bubble (speaker, mute, hang up, back to the call).
+- If it is swiped away, it comes back the next time you leave the call screen.
+
+**Selected numbers, several at once**
+- Google Phone's Add button opens a list where numbers already on Google's list are ticked: tick to add, untick to remove, then save once.
+- Numbers can also be chosen in the Dialer Enhancements app; the changes are applied the next time Google Phone's Selected-numbers screen opens.
+- Every change goes through Google Phone's own code. The module only reads Google's settings file, never writes it.
+
+**Status page**
+- Opened from the LSPosed manager (tap the module); the app has no home-screen icon.
+- Shows whether LSPosed is active, which Google Phone version was last seen, and for every feature whether it found what it needs in that version.
+
+**Under the hood**
+- Every feature acts only when exactly one matching method is found in Google Phone; otherwise Google Phone keeps its normal behaviour.
+- What was found is remembered per Google Phone version, so the slow search runs only once after each update.
+- Uses the modern Xposed API (101 or newer).
+
+Tested on a realme RMX3363 (Android 12, ColorOS 12, Vector 2.2) with Google Phone 175.0.763896600. Older versions such as Google Phone 88 are not tested yet.

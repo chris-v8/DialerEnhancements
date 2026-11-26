@@ -18,7 +18,7 @@ object Contract {
 
     /** Settings keys and their defaults. */
     object Settings {
-        const val DIAGNOSTICS = "diagnostic_logging"
+        const val DIAGNOSTICS = "detailed_logging"
         const val DIAGNOSTICS_DEFAULT = false
 
         const val RECORD_ALL = "record_all_calls"

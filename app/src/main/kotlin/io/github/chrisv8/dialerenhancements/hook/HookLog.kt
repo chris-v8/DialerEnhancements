@@ -8,7 +8,7 @@ package io.github.chrisv8.dialerenhancements.hook
  * The one logger used inside Google Phone. Every line looks like `[scope] message`.
  *
  * Rules: never log phone numbers, contact names, audio, file paths or announcement text.
- * Debug lines appear only while "diagnostic logging" is on in the module app.
+ * Debug lines appear only while "detailed logging" is on in the module app.
  */
 object HookLog {
     // Same values as android.util.Log, repeated so this file also works in PC unit tests.
