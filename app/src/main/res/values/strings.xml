@@ -34,6 +34,7 @@
     <string name="feature_selected_numbers">Selected numbers: multi-select</string>
     <string name="feature_bubble">Return-to-call bubble (Android 12+)</string>
     <string name="feature_recording_saved_message">No “Recording saved” message in calls</string>
+    <string name="feature_hold_recording">Hold without asking, record again after hold</string>
     <string name="feature_unknown">Other feature</string>
     <string name="feature_last_used">Last used: %1$s</string>
     <string name="state_active">Active</string>

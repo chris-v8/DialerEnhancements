@@ -299,6 +299,7 @@ private fun featureName(id: String): Int = when (id) {
     FeatureIds.BUBBLE -> R.string.feature_bubble
     FeatureIds.SELECTED_NUMBERS -> R.string.feature_selected_numbers
     FeatureIds.RECORDING_SAVED_MESSAGE -> R.string.feature_recording_saved_message
+    FeatureIds.HOLD_RECORDING -> R.string.feature_hold_recording
     else -> R.string.feature_unknown
 }
 

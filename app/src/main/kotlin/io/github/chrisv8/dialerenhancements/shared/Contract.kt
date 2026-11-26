@@ -71,11 +71,12 @@ object Contract {
         const val BUBBLE = "bubble"
         const val SELECTED_NUMBERS = "selected_numbers"
         const val RECORDING_SAVED_MESSAGE = "recording_saved_message"
+        const val HOLD_RECORDING = "hold_recording"
 
         /** Every id above, so the app can refuse anything else. */
         val all = setOf(
             CAN_RECORD, GEOFENCE, COUNTRY, TTS_FALLBACK, SETUP_CHECK, RECORD_ALL, BUBBLE,
-            SELECTED_NUMBERS, RECORDING_SAVED_MESSAGE,
+            SELECTED_NUMBERS, RECORDING_SAVED_MESSAGE, HOLD_RECORDING,
         )
     }
 

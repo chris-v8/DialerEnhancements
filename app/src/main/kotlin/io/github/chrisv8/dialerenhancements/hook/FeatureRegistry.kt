@@ -8,6 +8,7 @@ import io.github.chrisv8.dialerenhancements.hook.features.BubbleFeature
 import io.github.chrisv8.dialerenhancements.hook.features.CanRecordFeature
 import io.github.chrisv8.dialerenhancements.hook.features.CountryFeature
 import io.github.chrisv8.dialerenhancements.hook.features.GeofenceFeature
+import io.github.chrisv8.dialerenhancements.hook.features.HoldRecordingFeature
 import io.github.chrisv8.dialerenhancements.hook.features.RecordAllFeature
 import io.github.chrisv8.dialerenhancements.hook.features.RecordingSavedMessageFeature
 import io.github.chrisv8.dialerenhancements.hook.features.SelectedNumbersFeature
@@ -22,6 +23,7 @@ object FeatureRegistry {
         GeofenceFeature,
         CountryFeature,
         TtsFallbackFeature,
+        HoldRecordingFeature,
         // Deferred phase.
         RecordAllFeature,
         BubbleFeature,

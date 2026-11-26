@@ -3,6 +3,7 @@
 ## 1.1.0 (unreleased)
 
 **New**
+- Putting a recorded call on hold no longer asks "Hold and stop recording?": the call goes on hold straight away (the recording so far is saved), and recording starts again by itself when the call is taken off hold (while the call screen is open).
 - No "Recording saved." message sliding up on the call screen when a recording ends during a call. Other call-screen messages are unchanged.
 
 **Changed**

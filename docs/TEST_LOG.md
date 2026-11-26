@@ -9,6 +9,7 @@ Results of tests on a real phone, newest first. "Spec D-n" refers to the accepta
 | Built-in English announcement removed; the other eight features active | Pass. |
 | Call recorded automatically through the text-to-speech fallback (no TTS engine installed) | Pass: "text-to-speech failed (-1); used a silent announcement instead"; recording saved (user). |
 | No announcement heard by the other side | Pass (user). |
+| Hold during a recorded call: no "Hold and stop recording?" question; recording restarted by itself about 0.4 s after taking the call off hold | Pass (user). |
 | "Recording saved." message not shown when recording is stopped during a call; recording still saved | Pass (user). |
 | Text-to-speech engine bypassed: the silent file is always used | Pass: call recorded automatically, nothing announced (user). Not yet tried with an engine installed. |
 
