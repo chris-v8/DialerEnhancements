@@ -293,7 +293,6 @@ private fun featureName(id: String): Int = when (id) {
     FeatureIds.CAN_RECORD -> R.string.feature_can_record
     FeatureIds.GEOFENCE -> R.string.feature_geofence
     FeatureIds.COUNTRY -> R.string.feature_country
-    FeatureIds.ANNOUNCEMENT_LOCALE -> R.string.feature_announcement_locale
     FeatureIds.TTS_FALLBACK -> R.string.feature_tts_fallback
     FeatureIds.SETUP_CHECK -> R.string.feature_setup_check
     FeatureIds.RECORD_ALL -> R.string.feature_record_all

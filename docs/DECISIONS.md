@@ -12,7 +12,7 @@ The design documents in `docs/design/` were written before these choices were ma
 | 6 | DEX search | DexKit 2.3.0 behind `CodeSearch`/`Finder`, with a per-version discovery cache. | 2026-11-25 |
 | 7 | "Record all calls" default | Off. | 2026-11-25 |
 | 8 | Announcement text (SPEC F5) | Always blanked, as in CallRecording 1.5. Supersedes REWRITE_PLAN D7. | 2026-11-25 |
-| 9 | v88 locale shape (SPEC F4) | Not matched; v88 keeps the text-to-speech path, as in 1.5. | 2026-11-25 |
+| 9 | Built-in English announcement (SPEC F4) | ~~v88 shape not matched~~. Removed entirely in 1.1.0 (user's choice, 2026-11-26): Google Phone's announcement locale is no longer changed. | 2026-11-25 |
 | 10 | Timing diagnostics (SPEC F8) | Optional feature, off by default, added before parity. | 2026-11-25 |
 | 11 | Languages | English only. | 2026-11-25 |
 | 12 | Matching rule | "Exactly one match" for every lookup, including F1–F4 (1.5 took the first match there). | 2026-11-25 |

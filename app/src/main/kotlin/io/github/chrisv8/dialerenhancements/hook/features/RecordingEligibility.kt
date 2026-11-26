@@ -1,13 +1,12 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
 // Copyright (C) 2026 Chris (chris-v8)
-// Origin: written for DialerEnhancements from docs/design/SPEC.md F1–F4 (markers are Google Phone's own strings).
+// Origin: written for DialerEnhancements from docs/design/SPEC.md F1–F3 (markers are Google Phone's own strings).
 // Both geofence names (F2) were found by Chris for CallRecording.
 
 package io.github.chrisv8.dialerenhancements.hook.features
 
 import io.github.chrisv8.dialerenhancements.hook.find.shape
 import io.github.chrisv8.dialerenhancements.shared.Contract.FeatureIds
-import java.util.Locale
 
 /** Shape shared by Google Phone's plain yes/no checks: no parameters, returns `boolean`. */
 private val yesNoCheck = shape {
@@ -35,20 +34,4 @@ object GeofenceFeature : FixedAnswerFeature(
 /** SPEC F3: "is this a call-recording country?" → yes. */
 object CountryFeature : FixedAnswerFeature(FeatureIds.COUNTRY, listOf("isCallRecordingCountry"), yesNoCheck) {
     override val answer = true
-}
-
-/**
- * SPEC F4: the recording announcement uses Google's built-in US-English audio instead of
- * text-to-speech. Matches 2xx releases; v88 shapes this method differently and is left alone
- * on purpose (it goes through the text-to-speech fallback instead).
- */
-object AnnouncementLocaleFeature : FixedAnswerFeature(
-    FeatureIds.ANNOUNCEMENT_LOCALE,
-    listOf("getSupportedLocaleFromCountryCode"),
-    shape {
-        params(Map::class.java, String::class.java)
-        returns(Locale::class.java)
-    },
-) {
-    override val answer: Locale = Locale.US
 }

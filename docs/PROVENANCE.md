@@ -17,7 +17,7 @@ Files carried over from Chris's own work in CallRecording are marked "Carried ov
 | `hook/HookLog.kt` | Written from the plan | REWRITE_PLAN §4.5 | 2026-11-25 |
 | `hook/HookSettings.kt`, `hook/BridgeClient.kt`, `hook/AppContext.kt` | Written from the spec and plan | F12, REWRITE_PLAN §5, S18 | 2026-11-25 |
 | `hook/find/*` | Written from the spec and plan | §1.4, REWRITE_PLAN §4.2–4.3 | 2026-11-25 |
-| `hook/features/FixedAnswerFeature.kt`, `hook/features/RecordingEligibility.kt` | Written from the spec; both geofence names are Chris's finding | F1–F4 | 2026-11-25 |
+| `hook/features/FixedAnswerFeature.kt`, `hook/features/RecordingEligibility.kt` | Written from the spec; both geofence names are Chris's finding | F1–F3 (F4 removed in 1.1.0) | 2026-11-25 |
 | `hook/features/TtsFallbackFeature.kt`, `hook/util/SilentWav.kt` | Written from the spec | F5 | 2026-11-25 |
 | `hook/features/SetupCheck.kt` | Written from the spec | F6 | 2026-11-25 |
 | `hook/find/FutureFactory.kt` | Written from the spec | F7.1 | 2026-11-25 |

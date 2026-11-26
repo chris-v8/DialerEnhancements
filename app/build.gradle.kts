@@ -22,8 +22,8 @@ android {
         applicationId = "io.github.chrisv8.dialerenhancements"
         minSdk = 28
         targetSdk = 37
-        versionCode = 10000
-        versionName = "1.0.0"
+        versionCode = 10100
+        versionName = "1.1.0"
         ndk {
             // DexKit ships native code; arm64 covers every Android 12+ phone.
             abiFilters += "arm64-v8a"

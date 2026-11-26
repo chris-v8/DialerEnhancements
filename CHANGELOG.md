@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.1.0 (unreleased)
+
+**Removed**
+- The module no longer switches Google Phone to its built-in English recording announcement. On phones where Google Phone has no built-in announcement for the country and no text-to-speech engine is working, recording now starts without any announcement.
+
 ## 1.0.0 (2026-11-26)
 
 First release. Dialer Enhancements is a new, independent LSPosed module for Google Phone, written from a behaviour description. It does what the CallRecording module 1.5 did, and a little more.

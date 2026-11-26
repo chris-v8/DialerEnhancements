@@ -28,7 +28,6 @@
     <string name="feature_can_record">Record button</string>
     <string name="feature_geofence">Region check</string>
     <string name="feature_country">Country check</string>
-    <string name="feature_announcement_locale">Built-in English announcement</string>
     <string name="feature_tts_fallback">Text-to-speech fallback</string>
     <string name="feature_setup_check">Setup check</string>
     <string name="feature_record_all">Record all calls</string>

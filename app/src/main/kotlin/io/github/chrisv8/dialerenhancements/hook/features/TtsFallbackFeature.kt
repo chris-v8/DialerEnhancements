@@ -30,8 +30,8 @@ import java.util.concurrent.ConcurrentHashMap
  * fails. These hooks hand Google Phone a silent sound file and the callback instead.
  *
  * The announcement text is always blanked (the user's decision), so any announcement made
- * with text-to-speech is silent. Google's built-in audio (see AnnouncementLocaleFeature) is
- * not affected.
+ * with text-to-speech is silent. Where Google Phone has built-in audio for the country, that
+ * audio still plays.
  *
  * The hooks are on Android's own TextToSpeech class, so no code search is needed.
  *

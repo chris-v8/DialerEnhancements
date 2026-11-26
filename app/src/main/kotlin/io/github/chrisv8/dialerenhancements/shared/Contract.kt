@@ -65,7 +65,6 @@ object Contract {
         const val CAN_RECORD = "can_record"
         const val GEOFENCE = "geofence"
         const val COUNTRY = "country"
-        const val ANNOUNCEMENT_LOCALE = "announcement_locale"
         const val TTS_FALLBACK = "tts_fallback"
         const val SETUP_CHECK = "setup_check"
         const val RECORD_ALL = "record_all"
@@ -74,7 +73,7 @@ object Contract {
 
         /** Every id above, so the app can refuse anything else. */
         val all = setOf(
-            CAN_RECORD, GEOFENCE, COUNTRY, ANNOUNCEMENT_LOCALE, TTS_FALLBACK, SETUP_CHECK, RECORD_ALL, BUBBLE,
+            CAN_RECORD, GEOFENCE, COUNTRY, TTS_FALLBACK, SETUP_CHECK, RECORD_ALL, BUBBLE,
             SELECTED_NUMBERS,
         )
     }
