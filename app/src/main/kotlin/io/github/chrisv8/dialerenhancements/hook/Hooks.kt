@@ -4,6 +4,7 @@
 
 package io.github.chrisv8.dialerenhancements.hook
 
+import android.content.pm.ApplicationInfo
 import io.github.libxposed.api.XposedInterface
 import io.github.libxposed.api.XposedInterface.ExceptionMode
 import io.github.libxposed.api.XposedInterface.HookHandle
@@ -25,6 +26,9 @@ class Hooks(private val xposed: XposedInterface) {
 
     /** Google's method never runs; every call returns what [value] gives. */
     fun replace(target: Method, value: () -> Any?): HookHandle = intercept(target) { value() }
+
+    /** The module's own APK, for its strings and icons inside Google Phone. */
+    val moduleApplicationInfo: ApplicationInfo get() = xposed.moduleApplicationInfo
 
     /** Calls Google's original method, skipping every hook on it (including ours). */
     fun callOriginal(target: Method, thisObject: Any?, vararg args: Any?): Any? =

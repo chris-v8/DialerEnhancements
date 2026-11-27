@@ -98,6 +98,7 @@ fun StatusScreen(refreshKey: Int, onOpenPhone: () -> Unit, onChooseNumbers: () -
             PhoneCard(installed, report, onOpenPhone)
             AutomaticRecordingCard(settings, connected = service != null)
             SelectedNumbersCard(settings, queue, onChooseNumbers)
+            ContactsTabCard(settings, connected = service != null)
             report?.let { FeaturesCard(it.features, lastHit = { id -> store.lastHit(id) }) }
             SettingsCard(settings, connected = service != null)
             Text(
@@ -223,6 +224,23 @@ private fun SelectedNumbersCard(settings: ModuleSettings, queue: SelectedNumbers
 }
 
 @Composable
+private fun ContactsTabCard(settings: ModuleSettings, connected: Boolean) {
+    SectionCard(R.string.section_contacts_tab) {
+        var contactFilters by remember { mutableStateOf(settings.contactFilters) }
+        SwitchRow(
+            title = stringResource(R.string.setting_contact_filters),
+            description = stringResource(R.string.setting_contact_filters_description),
+            checked = contactFilters,
+            onChange = {
+                contactFilters = it
+                settings.contactFilters = it
+            },
+        )
+        if (!connected) Secondary(stringResource(R.string.settings_offline))
+    }
+}
+
+@Composable
 private fun SettingsCard(settings: ModuleSettings, connected: Boolean) {
     SectionCard(R.string.section_settings) {
         var diagnostics by remember { mutableStateOf(settings.diagnostics) }
@@ -300,6 +318,7 @@ private fun featureName(id: String): Int = when (id) {
     FeatureIds.SELECTED_NUMBERS -> R.string.feature_selected_numbers
     FeatureIds.RECORDING_SAVED_MESSAGE -> R.string.feature_recording_saved_message
     FeatureIds.HOLD_RECORDING -> R.string.feature_hold_recording
+    FeatureIds.CONTACT_FILTERS -> R.string.feature_contact_filters
     else -> R.string.feature_unknown
 }
 

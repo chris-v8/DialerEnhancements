@@ -35,6 +35,7 @@
     <string name="feature_bubble">Return-to-call bubble (Android 12+)</string>
     <string name="feature_recording_saved_message">No “Recording saved” message in calls</string>
     <string name="feature_hold_recording">Hold without asking, record again after hold</string>
+    <string name="feature_contact_filters">Contacts tab: account and label filters</string>
     <string name="feature_unknown">Other feature</string>
     <string name="feature_last_used">Last used: %1$s</string>
     <string name="state_active">Active</string>
@@ -56,6 +57,19 @@
     <string name="selected_numbers_waiting">Waiting: %1$d to add, %2$d to remove. Open Google Phone → Settings → Call recording → Selected numbers to apply.</string>
     <string name="setting_multi_select">Multi-select in Google Phone\'s Add button</string>
     <string name="setting_multi_select_description">The Add button under Selected numbers opens this app\'s list, where you can tick and untick many numbers. When off, Google\'s one-number picker opens.</string>
+
+    <string name="section_contacts_tab">Contacts tab</string>
+    <string name="setting_contact_filters">Account and label filters</string>
+    <string name="setting_contact_filters_description">Google Phone\'s Contacts tab gets the account and label filters of Google Contacts. Switching on or off takes effect after Google Phone is force-stopped and opened again.</string>
+
+    <!-- Shown inside Google Phone, on the Contacts tab. -->
+    <string name="contacts_filter_all">All contacts</string>
+    <string name="contacts_filter_device">Device</string>
+    <string name="contacts_filter_no_labels">No labels</string>
+    <string name="contacts_filter_by_account">Filter by account</string>
+    <string name="contacts_filter_by_label">Filter by label</string>
+    <string name="contacts_filter_clear_label">Stop filtering by label</string>
+    <string name="contacts_filter_count">%1$d contacts</string>
 
     <string name="picker_title">Numbers to always record</string>
     <string name="picker_search">Search name or number</string>

@@ -27,6 +27,10 @@ object Contract {
         /** Google Phone's "Add" button under Selected numbers opens the module's multi-select list. */
         const val MULTI_SELECT = "multi_select_add_button"
         const val MULTI_SELECT_DEFAULT = true
+
+        /** Account and label filters on Google Phone's Contacts tab. */
+        const val CONTACT_FILTERS = "contact_filters"
+        const val CONTACT_FILTERS_DEFAULT = true
     }
 
     /** The module app's content provider that Google Phone reports to. */
@@ -72,11 +76,12 @@ object Contract {
         const val SELECTED_NUMBERS = "selected_numbers"
         const val RECORDING_SAVED_MESSAGE = "recording_saved_message"
         const val HOLD_RECORDING = "hold_recording"
+        const val CONTACT_FILTERS = "contact_filters"
 
         /** Every id above, so the app can refuse anything else. */
         val all = setOf(
             CAN_RECORD, GEOFENCE, COUNTRY, TTS_FALLBACK, SETUP_CHECK, RECORD_ALL, BUBBLE,
-            SELECTED_NUMBERS, RECORDING_SAVED_MESSAGE, HOLD_RECORDING,
+            SELECTED_NUMBERS, RECORDING_SAVED_MESSAGE, HOLD_RECORDING, CONTACT_FILTERS,
         )
     }
 

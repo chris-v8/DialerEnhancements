@@ -27,6 +27,7 @@ Files carried over from Chris's own work in CallRecording are marked "Carried ov
 | `app/picker/*`, `app/SelectedNumbersStore.kt` | Written from the spec; the picker's behaviour is Chris's design (CallRecording NumberPickerActivity), reimplemented without looking at that file | F10.5–F10.8 | 2026-11-26 |
 | `hook/features/RecordingSavedMessageFeature.kt` | New feature (not in the CallRecording spec); Google Phone 175 facts found with dexdump, no Google code copied | — | 2026-11-26 |
 | `hook/features/HoldRecordingFeature.kt` | New feature (not in the CallRecording spec); only Android's public classes are hooked, Google Phone's string names found with aapt2 | — | 2026-11-27 |
+| `hook/features/ContactFiltersFeature.kt`, `hook/contacts/*` | New feature (not in the CallRecording spec), written by Chris for the standalone Contacts-tab-filters module and moved here; Google Phone 175 facts found with dexdump/jadx, Google Contacts' sheets used only as a visual reference, no Google code copied | — | 2026-11-27 |
 | `app/*` (module app: settings, status page, bridge provider) | Written from the spec and plan | F11, F12, REWRITE_PLAN §6 | 2026-11-25 |
 | `app/src/main/res/**`, `AndroidManifest.xml`, `META-INF/xposed/*` | Written for this project | — | 2026-11-25 |
 | Build files | Written for this project | REWRITE_PLAN §10 | 2026-11-25 |

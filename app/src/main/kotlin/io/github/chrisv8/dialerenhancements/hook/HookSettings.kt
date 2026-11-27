@@ -41,6 +41,11 @@ object HookSettings {
         get() = read { it.getBoolean(Contract.Settings.MULTI_SELECT, Contract.Settings.MULTI_SELECT_DEFAULT) }
             ?: false
 
+    /** Read when the Contacts tab is built and on every list load. On when the settings can't be read. */
+    val contactFilters: Boolean
+        get() = read { it.getBoolean(Contract.Settings.CONTACT_FILTERS, Contract.Settings.CONTACT_FILTERS_DEFAULT) }
+            ?: Contract.Settings.CONTACT_FILTERS_DEFAULT
+
     private fun <T> read(block: (SharedPreferences) -> T): T? = try {
         prefs?.let(block)
     } catch (_: Throwable) {

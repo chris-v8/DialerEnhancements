@@ -16,6 +16,7 @@ An LSPosed module for **Google Phone** (`com.google.android.dialer`) that unlock
 - No "Recording saved." message popping up on the call screen when a recording ends.
 - Hold without the "Hold and stop recording?" question; recording starts again by itself when the call comes off hold.
 - **Selected numbers, several at once:** Google Phone's Add button (Settings → Call recording → Selected numbers) opens a list where you tick numbers to add and untick numbers to remove, all in one go. You can also choose them in the Dialer Enhancements app; the changes are applied the next time you open that Google Phone screen. Every change goes through Google Phone's own code; the module never edits its settings file.
+- **Contacts tab filters** (on by default): the Contacts tab gets the account and label filters of Google Contacts. Pick *All contacts*, one account (for example a DAVx⁵ address book) or *Device*, and/or one label; both sheets show how many contacts each choice has. The list, its A–Z letters and the fast scroller follow the filter, and the choice is kept. Switching the feature on or off needs a restart of Google Phone.
 
 ## Requirements
 

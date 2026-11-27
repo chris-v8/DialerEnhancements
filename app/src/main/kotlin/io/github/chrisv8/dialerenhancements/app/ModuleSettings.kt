@@ -37,6 +37,13 @@ class ModuleSettings(context: Context) {
             Framework.service.value?.let(::copyTo)
         }
 
+    var contactFilters: Boolean
+        get() = local.getBoolean(Contract.Settings.CONTACT_FILTERS, Contract.Settings.CONTACT_FILTERS_DEFAULT)
+        set(value) {
+            local.edit().putBoolean(Contract.Settings.CONTACT_FILTERS, value).apply()
+            Framework.service.value?.let(::copyTo)
+        }
+
     /** Writes every setting to LSPosed. Called whenever LSPosed connects, and after each change. */
     fun copyTo(service: XposedService) {
         try {
@@ -44,6 +51,7 @@ class ModuleSettings(context: Context) {
                 .putBoolean(Contract.Settings.DIAGNOSTICS, diagnostics)
                 .putBoolean(Contract.Settings.RECORD_ALL, recordAll)
                 .putBoolean(Contract.Settings.MULTI_SELECT, multiSelect)
+                .putBoolean(Contract.Settings.CONTACT_FILTERS, contactFilters)
                 .apply()
         } catch (t: Throwable) {
             Log.w(TAG, "can't save settings to LSPosed", t)

@@ -1,5 +1,10 @@
 # Changelog
 
+## Unreleased (branch `contacts-filters`)
+
+**New**
+- Account and label filters on Google Phone's Contacts tab, like those of Google Contacts: an account chip ("All contacts ▾") and a label button under the search bar, each opening a sheet with contact counts. The list, the A–Z letters and the fast scroller follow the filter; the choice is kept across restarts. Switch: *Contacts tab → Account and label filters* in the module's settings (on by default, takes effect after Google Phone restarts). Moved here from the standalone Contacts-tab-filters module.
+
 ## 1.1.0 (2026-11-27)
 
 **New**
